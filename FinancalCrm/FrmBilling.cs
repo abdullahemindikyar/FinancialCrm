@@ -46,7 +46,7 @@ namespace FinancalCrm
 
             var values = db.Bills.ToList();
             paymentsDataGridView.DataSource = values;
-            MessageBox.Show("Ödeme eklendi.");
+            MessageBox.Show("New payment added successfully.", "Payment & Invoice Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
@@ -71,6 +71,7 @@ namespace FinancalCrm
             txtPaymentAmount.Text = value.BillAmount.ToString();
             txtPaymentPeriod.Text = value.BillPeriod;
 
+            MessageBox.Show("Payment found successfully.", "Payment & Invoice Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void updatePaymentButton_Click(object sender, EventArgs e)
@@ -85,7 +86,7 @@ namespace FinancalCrm
 
             var values = db.Bills.ToList();
             paymentsDataGridView.DataSource = values;
-            MessageBox.Show("Ödeme güncellendi.");
+            MessageBox.Show("Payment updated successfully.", "Payment & Invoice Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void deletePaymentButton_Click(object sender, EventArgs e)
@@ -98,7 +99,7 @@ namespace FinancalCrm
 
             var values = db.Bills.ToList();
             paymentsDataGridView.DataSource = values;
-            MessageBox.Show("Ödeme silindi.");
+            MessageBox.Show("Payment deleted successfully.", "Payment & Invoice Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void dashboardButton_Click(object sender, EventArgs e)

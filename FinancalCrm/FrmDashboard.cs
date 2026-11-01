@@ -75,7 +75,7 @@ namespace FinancalCrm
             }
 
             var bankProcess = bankProcesses[processCount];
-            isNameLabel.Text = bankProcess.Description;
+            isNameLabel.Text = "Son Yapılan 3 İşlem";
             isBalanceLabel.Text = bankProcess.Amount.ToString() + " ₺";
 
             processCount++;
@@ -118,7 +118,7 @@ namespace FinancalCrm
             foreach (var bank in db.Banks.ToList())
                 chart1.Series[0].Points.AddXY(bank.BankTitle, bank.BankBalance);
 
-            chart2.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            chart2.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
             chart2.Series[0].Name = "Fatura Tutarı";
             chart2.Series[0].Points.Clear();
 

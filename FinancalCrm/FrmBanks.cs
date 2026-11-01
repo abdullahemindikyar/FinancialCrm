@@ -12,10 +12,10 @@ namespace FinancalCrm
         {
             #region
             InitializeComponent();
-            dashboardButton.Click += dashboardButton_Click;
-            invoicesButton.Click += invoicesButton_Click;
-            settingsButton.Click += settingsButton_Click;
-            logoutButton.Click += logoutButton_Click;
+            btnDashboard.Click += dashboardButton_Click;
+            btnBilling.Click += invoicesButton_Click;
+            btnSettings.Click += settingsButton_Click;
+            btnLogout.Click += logoutButton_Click;
             #endregion
         }
 
@@ -85,25 +85,20 @@ namespace FinancalCrm
 
             var isBankBalance = db.Banks.Where(x => x.BankTitle == "İş Bankası").Select(y => y.BankBalance).FirstOrDefault();
 
-            ziraatBalanceLabel.Text = ziraatBankBalance.ToString() + " ₺";
-            vakifBalanceLabel.Text = vakifBankBalance.ToString() + " ₺";
-            isBalanceLabel.Text = isBankBalance.ToString() + " ₺";
+            lblZiraatBalance.Text = Convert.ToDecimal(ziraatBankBalance).ToString("N2") + " ₺";
+            lblVakifBalance.Text = Convert.ToDecimal(vakifBankBalance).ToString("N2") + " ₺";
+            lblIsBalance.Text = Convert.ToDecimal(isBankBalance).ToString("N2") + " ₺";
 
             // Banka hareketleri 
-            var bankProcess1 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Take(1).FirstOrDefault();
-            transaction1Label.Text = bankProcess1.Description + " - " + bankProcess1.Amount.ToString() + " ₺" +  bankProcess1.ProcessDate;
-
-            var bankProcess2 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Skip(1).Take(1).FirstOrDefault();
-            transaction2Label.Text = bankProcess2.Description + " - " + bankProcess2.Amount.ToString() + " ₺" + bankProcess2.ProcessDate;
-
-            var bankProcess3 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Skip(2).Take(1).FirstOrDefault();
-            transaction3Label.Text = bankProcess3.Description + " - " + bankProcess3.Amount.ToString() + " ₺" + bankProcess3.ProcessDate;
-
-            var bankProcess4 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Skip(3).Take(1).FirstOrDefault();
-            transaction4Label.Text = bankProcess4.Description + " - " + bankProcess4.Amount.ToString() + " ₺" + bankProcess4.ProcessDate;
-
-            var bankProcess5 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Skip(4).Take(1).FirstOrDefault();
-            transaction5Label.Text = bankProcess5.Description + " - " + bankProcess5.Amount.ToString() + " ₺" + bankProcess5.ProcessDate;
+            dgvBankTransactions.Rows.Clear();
+            foreach (var process in db.BankProcesses.OrderByDescending(x => x.BankProcessId).Take(5))
+            {
+                dgvBankTransactions.Rows.Add(
+                    process.Banks == null ? "Banka" : process.Banks.BankTitle,
+                    process.Description,
+                    Convert.ToDecimal(process.Amount).ToString("N2") + " ₺",
+                    process.ProcessDate.HasValue ? process.ProcessDate.Value.ToString("dd.MM.yyyy") : "-");
+            }
         }
 
         private void dashboardButton_Click(object sender, EventArgs e)
