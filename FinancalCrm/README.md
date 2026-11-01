@@ -1,5 +1,7 @@
 # FinancialCrm
 
+> 💡 **Arayüz Tasarımı Hakkında:** Form ekranlarının görsel düzeni ve kullanıcı arayüzü (UI) öğelerinin yapılandırılmasında yapay zeka araçlarından faydalanılmıştır.
+
 FinancialCrm, banka hesaplarını, banka hareketlerini, faturaları ve harcamaları yönetmek için hazırlanmış Windows Forms uygulamasıdır.
 
 ## Özellikler
